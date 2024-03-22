@@ -75,7 +75,6 @@ class _newproductState extends State<newproduct> {
                       const Padding(padding: EdgeInsets.only(right: 10)),
                       DropdownButton(
                         dropdownColor: Colors.grey[200],
-
                           style: const TextStyle(fontSize: 20,color: Colors.black),
                           value: _selectedcategory,
                           items: Category.values
@@ -123,15 +122,12 @@ class _newproductState extends State<newproduct> {
                         ],
                       ),
                     ),
-
-
                   ]),
                   const Padding(padding: EdgeInsets.only(bottom: 10)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       ElevatedButton(
-        
                           style: ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.red[500]!),shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))),
                           onPressed: () {
                             Navigator.pop(context);
@@ -142,6 +138,19 @@ class _newproductState extends State<newproduct> {
                       const Padding(padding: EdgeInsets.only(right: 10)),
                       ElevatedButton(
                           onPressed: () {
+                            if(_nameproduct.text.trim() == ''|| _amountroduct.text.trim() == ''){
+                                showDialog(context: context, builder: (ctx)=> const AlertDialog(
+                                  backgroundColor: Colors.red,
+                                  title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [Text('Thông báo',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)]),
+                                  content: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(child: Text('Chưa nhập đủ thông tin sản phẩm!',style: TextStyle(fontSize: 20,color: Colors.white,))),
+                                    ],
+                                  ),
+                                ));
+                                return;
+                            }
                             widget.onAddProduct(product(title: _nameproduct.text, amount: int.parse(_amountroduct.text) , date: _selecteddate, cate: _selectedcategory));
                           },
                           style: ButtonStyle(backgroundColor: const MaterialStatePropertyAll<Color>(Colors.green),shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))),

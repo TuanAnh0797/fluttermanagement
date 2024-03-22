@@ -59,6 +59,7 @@ class _loginformState extends State<loginform> {
                             decoration: TextDecoration.overline)),
                     const Padding(padding: EdgeInsets.only(top: 30)),
                     TextField(
+
                       controller: _user,
                       style: const TextStyle(
                           fontSize: 20,
@@ -98,7 +99,14 @@ class _loginformState extends State<loginform> {
                             Navigator.popAndPushNamed(context, listroute[1]);
                           }
                           else{
-                            showDialog(context: context, builder: (ctx)=>const AlertDialog(title: Text('Thông báo'),content: Text('Tài khoản không đúng'),));
+                            //showDialog(context: context, builder: (ctx)=>const AlertDialog(title: Text('Thông báo'),content: Text('Tài khoản không đúng'),));
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  content: Text('Tài khoản không đúng'),
+                                showCloseIcon: true,
+
+                              )
+                              );
+
                           }
 
                         },

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:managerrestaurant/Model/product.dart';
 class products extends StatefulWidget {
 
-  const products({required this.listproduct, super.key});
+  const products({required this.listproduct, super.key, required this.removeproduct});
   final List<product> listproduct;
+  final void Function (product removeproduct) removeproduct;
   @override
   State<products> createState() => _productsState();
 }
@@ -17,7 +18,7 @@ class _productsState extends State<products> {
         itemBuilder: (ctx,index)=> Dismissible(
           key: UniqueKey(),
           onDismissed: (direction){
-            widget.listproduct.removeAt(index);
+            widget.removeproduct(widget.listproduct[index]);
           },
           child: Card(
           child: Row(
@@ -43,9 +44,7 @@ class _productsState extends State<products> {
               ),
               IconButton(
                   onPressed: (){
-                    setState(() {
-                      widget.listproduct.removeAt(index);
-                    });
+                    widget.removeproduct(widget.listproduct[index]);
                   },
                   icon: const Icon(Icons.delete,color: Colors.red,)
               ),
